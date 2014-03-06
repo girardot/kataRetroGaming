@@ -1,43 +1,38 @@
 package trivia;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import java.util.LinkedList;
-import java.util.List;
+
+import static trivia.Category.*;
 
 public class Game {
 
     private StringBuilder displayResult = new StringBuilder();
 
-    List<Player> players = Lists.newArrayList();
+    private LinkedList<Player> players = Lists.newLinkedList();
 
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    private Questions popQuestions = new Questions(POP);
+    private Questions scienceQuestions = new Questions(SCIENCE);
+    private Questions sportsQuestions = new Questions(SPORTS);
+    private Questions rockQuestions = new Questions(ROCK);
 
-    Player currentPlayer;
+    private Player currentPlayer;
 
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast("Rock Question " + i);
-        }
     }
 
     public void addNewPlayer(String playerName) {
         Player newPlayer = new Player(playerName);
-        players.add(newPlayer);
-        displayResult.append(playerName + " was added\r\n");
-        displayResult.append("They are player number " + players.size() + "\r\n");
+        players.addLast(newPlayer);
         if(currentPlayer == null) {
             currentPlayer = newPlayer;
         }
+
+        displayResult.append(playerName + " was added\r\n");
+        displayResult.append("They are player number " + players.size() + "\r\n");
     }
 
     public void roll(int roll) {
@@ -70,27 +65,27 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory() == "Pop")
-            displayResult.append(popQuestions.removeFirst() + "\r\n");
-        if (currentCategory() == "Science")
-            displayResult.append(scienceQuestions.removeFirst() + "\r\n");
-        if (currentCategory() == "Sports")
-            displayResult.append(sportsQuestions.removeFirst() + "\r\n");
-        if (currentCategory() == "Rock")
-            displayResult.append(rockQuestions.removeFirst() + "\r\n");
+        if (currentCategory() == POP)
+            displayResult.append(popQuestions.nextQuestion() + "\r\n");
+        if (currentCategory() == SCIENCE)
+            displayResult.append(scienceQuestions.nextQuestion() + "\r\n");
+        if (currentCategory() == SPORTS)
+            displayResult.append(sportsQuestions.nextQuestion() + "\r\n");
+        if (currentCategory() == ROCK)
+            displayResult.append(rockQuestions.nextQuestion() + "\r\n");
     }
 
-    private String currentCategory() {
-        if (currentPlayer.getPlace() == 0) return "Pop";
-        if (currentPlayer.getPlace() == 4) return "Pop";
-        if (currentPlayer.getPlace() == 8) return "Pop";
-        if (currentPlayer.getPlace() == 1) return "Science";
-        if (currentPlayer.getPlace() == 5) return "Science";
-        if (currentPlayer.getPlace() == 9) return "Science";
-        if (currentPlayer.getPlace() == 2) return "Sports";
-        if (currentPlayer.getPlace() == 6) return "Sports";
-        if (currentPlayer.getPlace() == 10) return "Sports";
-        return "Rock";
+    private Category currentCategory() {
+        if (currentPlayer.getPlace() == 0) return POP;
+        if (currentPlayer.getPlace() == 4) return POP;
+        if (currentPlayer.getPlace() == 8) return POP;
+        if (currentPlayer.getPlace() == 1) return SCIENCE;
+        if (currentPlayer.getPlace() == 5) return SCIENCE;
+        if (currentPlayer.getPlace() == 9) return SCIENCE;
+        if (currentPlayer.getPlace() == 2) return SPORTS;
+        if (currentPlayer.getPlace() == 6) return SPORTS;
+        if (currentPlayer.getPlace() == 10) return SPORTS;
+        return ROCK;
     }
 
     public boolean wasCorrectlyAnswered() {
