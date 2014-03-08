@@ -86,15 +86,11 @@ public class Game {
         if (currentPlayer.isInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
                 displayResult.append("Answer was correct!!!!\r\n");
-
                 currentPlayer.addCoin();
-
                 displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
-
-                boolean winner = !(currentPlayer.getPurse() == 6);
-
+                boolean notAWinner = !currentPlayer.hasWin();
                 currentPlayer = nextPlayer();
-                return winner;
+                return notAWinner;
             } else {
                 currentPlayer = nextPlayer();
                 return true;
@@ -104,10 +100,9 @@ public class Game {
             displayResult.append("Answer was corrent!!!!\r\n");
             currentPlayer.addCoin();
             displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
-
-            boolean winner = !(currentPlayer.getPurse() == 6);
+            boolean notAWinner = !currentPlayer.hasWin();
             currentPlayer = nextPlayer();
-            return winner;
+            return notAWinner;
         }
     }
 

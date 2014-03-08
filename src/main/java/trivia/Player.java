@@ -54,4 +54,8 @@ public class Player {
         purse ++;
     }
 
+    public boolean hasWin() {
+        return purse >= 6;
+    }
+
 }
