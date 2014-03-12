@@ -55,7 +55,7 @@ public class GameTest {
 
         } while (notAWinner);
 
-        assertThat(oldGameResult.toString()).isEqualTo(newGame.getDisplayResult());
+        assertThat(newGame.getDisplayResult()).isEqualTo(oldGameResult.toString());
     }
 
 }
