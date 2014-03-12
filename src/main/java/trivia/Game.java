@@ -19,8 +19,6 @@ public class Game {
 
     private Player currentPlayer;
 
-    boolean isGettingOutOfPenaltyBox;
-
     public Game() {
     }
 
@@ -41,20 +39,18 @@ public class Game {
 
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 != 0) {
-                isGettingOutOfPenaltyBox = true;
+                currentPlayer.setGettingOutOfPenaltyBox(true);
 
                 displayResult.append(currentPlayer.getName() + " is getting out of the penalty box\r\n");
 
                 currentPlayer.move(roll);
-
                 displayResult.append(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace() + "\r\n");
                 displayResult.append("The category is " + currentCategory() + "\r\n");
                 askQuestion();
             } else {
                 displayResult.append(currentPlayer.getName() + " is not getting out of the penalty box\r\n");
-                isGettingOutOfPenaltyBox = false;
+                currentPlayer.setGettingOutOfPenaltyBox(false);
             }
-
         } else {
             currentPlayer.move(roll);
             displayResult.append(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace() + "\r\n");
@@ -84,7 +80,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (currentPlayer.isInPenaltyBox()) {
-            if (isGettingOutOfPenaltyBox) {
+            if (currentPlayer.isGettingOutOfPenaltyBox()) {
                 displayResult.append("Answer was correct!!!!\r\n");
                 currentPlayer.addCoin();
                 displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
