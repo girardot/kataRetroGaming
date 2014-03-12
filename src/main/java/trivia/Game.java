@@ -42,8 +42,8 @@ public class Game {
                 currentPlayer.setGettingOutOfPenaltyBox(true);
                 displayResult.append(currentPlayer.getName() + " is getting out of the penalty box\r\n");
             } else {
-                displayResult.append(currentPlayer.getName() + " is not getting out of the penalty box\r\n");
                 currentPlayer.setGettingOutOfPenaltyBox(false);
+                displayResult.append(currentPlayer.getName() + " is not getting out of the penalty box\r\n");
             }
         }
 
@@ -75,27 +75,17 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (currentPlayer.isInPenaltyBox()) {
-            if (currentPlayer.isGettingOutOfPenaltyBox()) {
-                displayResult.append("Answer was correct!!!!\r\n");
-                currentPlayer.addCoin();
-                displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
-                boolean notAWinner = !currentPlayer.hasWin();
-                currentPlayer = nextPlayer();
-                return notAWinner;
-            } else {
-                currentPlayer = nextPlayer();
-                return true;
-            }
-        } else {
+        boolean notAWinner = true;
 
-            displayResult.append("Answer was corrent!!!!\r\n");
+        if(!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
+            displayResult.append("Answer was correct!!!!\r\n");
             currentPlayer.addCoin();
             displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
-            boolean notAWinner = !currentPlayer.hasWin();
-            currentPlayer = nextPlayer();
-            return notAWinner;
+            notAWinner = !currentPlayer.hasWin();
         }
+
+        currentPlayer = nextPlayer();
+        return notAWinner;
     }
 
     public boolean wrongAnswer() {
