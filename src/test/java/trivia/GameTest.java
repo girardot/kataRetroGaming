@@ -14,8 +14,7 @@ public class GameTest {
 
     private static boolean oldNotAWinner;
 
-    @Test
-    public void should_be_same_for_old_and_new_game() {
+    public void run_one_game() {
 
         ByteArrayOutputStream oldGameResult = new ByteArrayOutputStream();
         System.setOut(new PrintStream(oldGameResult));
@@ -58,4 +57,10 @@ public class GameTest {
         assertThat(newGame.getDisplayResult()).isEqualTo(oldGameResult.toString());
     }
 
+    @Test
+    public void run_ten_games() throws Exception {
+        for (int i = 0; i < 11; i++) {
+            run_one_game();
+        }
+    }
 }
