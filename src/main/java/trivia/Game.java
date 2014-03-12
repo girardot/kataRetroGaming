@@ -40,18 +40,14 @@ public class Game {
         if (currentPlayer.isInPenaltyBox()) {
             if (roll % 2 != 0) {
                 currentPlayer.setGettingOutOfPenaltyBox(true);
-
                 displayResult.append(currentPlayer.getName() + " is getting out of the penalty box\r\n");
-
-                currentPlayer.move(roll);
-                displayResult.append(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace() + "\r\n");
-                displayResult.append("The category is " + currentCategory() + "\r\n");
-                askQuestion();
             } else {
                 displayResult.append(currentPlayer.getName() + " is not getting out of the penalty box\r\n");
                 currentPlayer.setGettingOutOfPenaltyBox(false);
             }
-        } else {
+        }
+
+        if(!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
             currentPlayer.move(roll);
             displayResult.append(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace() + "\r\n");
             displayResult.append("The category is " + currentCategory() + "\r\n");
