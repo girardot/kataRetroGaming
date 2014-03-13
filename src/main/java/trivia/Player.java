@@ -8,7 +8,7 @@ public class Player {
 
     private int purse = 0;
 
-    private boolean inPenaltyBox = false;
+    private boolean penalized = false;
 
     private boolean isGettingOutOfPenaltyBox = false;
 
@@ -20,32 +20,20 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPlace() {
         return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
     }
 
     public int getPurse() {
         return purse;
     }
 
-    public void setPurse(int purse) {
-        this.purse = purse;
+    public boolean isPenalized() {
+        return penalized;
     }
 
-    public boolean isInPenaltyBox() {
-        return inPenaltyBox;
-    }
-
-    public void setInPenaltyBox(boolean inPenaltyBox) {
-        this.inPenaltyBox = inPenaltyBox;
+    public void setPenalized(boolean penalized) {
+        this.penalized = penalized;
     }
 
     public boolean isGettingOutOfPenaltyBox() {
