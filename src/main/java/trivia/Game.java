@@ -25,7 +25,7 @@ public class Game {
     public void addNewPlayer(String playerName) {
         Player newPlayer = new Player(playerName);
         players.addLast(newPlayer);
-        if(currentPlayer == null) {
+        if (currentPlayer == null) {
             currentPlayer = newPlayer;
         }
 
@@ -47,7 +47,7 @@ public class Game {
             }
         }
 
-        if(!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
+        if (!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
             currentPlayer.move(roll);
             displayResult.append(currentPlayer.getName() + "'s new location is " + currentPlayer.getPlace() + "\r\n");
             displayResult.append("The category is " + currentCategory() + "\r\n");
@@ -68,16 +68,16 @@ public class Game {
     }
 
     private Category currentCategory() {
-        if (currentPlayer.getPlace()%4 == 0) return POP;
-        if (currentPlayer.getPlace()%4 == 1) return SCIENCE;
-        if (currentPlayer.getPlace()%4 == 2) return SPORTS;
+        if (currentPlayer.getPlace() % 4 == 0) return POP;
+        if (currentPlayer.getPlace() % 4 == 1) return SCIENCE;
+        if (currentPlayer.getPlace() % 4 == 2) return SPORTS;
         return ROCK;
     }
 
     public boolean wasCorrectlyAnswered() {
         boolean notAWinner = true;
 
-        if(!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
+        if (!currentPlayer.isInPenaltyBox() || currentPlayer.isGettingOutOfPenaltyBox()) {
             displayResult.append("Answer was correct!!!!\r\n");
             currentPlayer.addCoin();
             displayResult.append(currentPlayer.getName() + " now has " + currentPlayer.getPurse() + " Gold Coins.\r\n");
@@ -97,11 +97,11 @@ public class Game {
     }
 
     public String getDisplayResult() {
-        return displayResult.toString();  //To change body of created methods use File | Settings | File Templates.
+        return displayResult.toString();
     }
 
     private Player nextPlayer() {
-        return players.get((players.indexOf(currentPlayer) + 1)%players.size());
+        return players.get((players.indexOf(currentPlayer) + 1) % players.size());
     }
 
 }
